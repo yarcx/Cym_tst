@@ -9,6 +9,8 @@ import {
   SliderThumb,
 } from "@chakra-ui/react";
 import { FiCheck } from "react-icons/fi";
+import {useState} from "react"
+import { RiSlideshow4Line } from "react-icons/ri";
 
 
 const includesList = [
@@ -20,19 +22,45 @@ const includesList = [
 
 
 function WhitBoxMidContent() {
+  const [select, setSelect] = useState("right")
+
+  const handleSelect = (sides) => {
+    setSelect(sides)
+  }
+
     return (
       <Box h="auto" mt="0.9rem" className="flex flex-col w-10/12 mx-auto">
         <Box h="auto" className="flex items-start justify-between w-full">
           <Box
-            boxShadow="-9px 8px 20px -10px rgba(16,177,179,0.75)"
+            onClick={() => handleSelect("left")}
+            border={select === "left" ? "1px solid #94E1B2" : ""}
+            boxShadow=" -11px 11px 22px -34px rgba(52,143,184,0.77)"
             borderRadius="1rem"
             h="auto"
             w="48%"
+            backgroundColor={select === "left" ? "#F6F9FF" : ""}
             padding=" 2.5rem"
             display="flex"
             justifyContent="flex-end"
             flexDir="column"
+            position="relative"
           >
+            {select === "left" && (
+              <Box
+                position="absolute"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                right="-5"
+                top="-15px"
+                h="2.5rem"
+                w="2.5rem"
+                background="#94E1B2"
+                borderRadius="50%"
+              >
+                <FiCheck color="white" size="30px" />
+              </Box>
+            )}
             <Box>
               <Box as="p" color="#F1C71B" fontWeight="bold">
                 Starts from
@@ -85,29 +113,32 @@ function WhitBoxMidContent() {
           </Box>
           {/* WhiteBox left centered content goes here */}
           <Box
-            border="2px solid #D1E3F8"
+            onClick={() => handleSelect("right")}
+            border={select === "right" ? "1px solid #94E1B2" : ""}
             borderRadius="0.5rem"
             position="relative"
             h="auto"
             w="48%"
-            backgroundColor="#F6F9FF"
+            backgroundColor={select === "right" ? "#F6F9FF" : ""}
             padding="0.8rem"
             boxSizing="border-box"
           >
-            <Box
-              position="absolute"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              right="-5"
-              top="-15px"
-              h="2.5rem"
-              w="2.5rem"
-              background="#94E1B2"
-              borderRadius="50%"
-            >
-              <FiCheck color="white" size="30px" />
-            </Box>
+            {select === "right" && (
+              <Box
+                position="absolute"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                right="-5"
+                top="-15px"
+                h="2.5rem"
+                w="2.5rem"
+                background="#94E1B2"
+                borderRadius="50%"
+              >
+                <FiCheck color="white" size="30px" />
+              </Box>
+            )}
             <Box padding="0 2rem">
               <Box as="h2" fontSize="medium" fontWeight="bold" color="#477AEF">
                 Basic
